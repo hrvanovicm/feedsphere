@@ -1,0 +1,8 @@
+POST {{ url }}/subscriptions
+Content-Type: application/x-www-form-urlencoded
+
+name = test &
+url = http://127.0.0.1:8001/rss
+
+###
+GET {{ url }}/subscriptions
