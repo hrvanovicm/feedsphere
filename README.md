@@ -1,5 +1,46 @@
-# Feedsphere - RSS Reader and Self-Hosted Service
+# Feedsphere
 
-Feedsphere is a simple and efficient RSS reader and self-hosted service written in Python using the Falcon web framework. This project was initiated for personal use, driven by the desire to learn Python and create a straightforward RSS reader. The choice of Falcon as the web framework stems from its reputation for speed, simplicity, and a non-magical approach – qualities that resonate with those familiar with Spring in the Java ecosystem.
+Feedsphere is a self-hosted web service designed for storing and managing RSS articles. Built using Falcon for its simplicity and a welcome break from the Spring framework's magic, Feedsphere provides an efficient solution for handling subscriptions.
 
-by ChatGPT bro
+**Warning: This app is not production-ready; it is intended for experimental use with Falcon.**
+
+ by chatgpt bro
+
+## Getting Started
+
+1. Run `setup.sh` to install the required dependencies. (Linux only)
+
+    ```bash
+    chmod +x setup.sh
+    ./setup.sh
+    ```
+
+2. Run migrations using the following commands:
+
+    ```bash
+    PYTHONPATH=/home/mirza/Projects/feedsphere/ alembic -c ./app/database/alembic.ini revision --autogenerate
+    PYTHONPATH=/home/mirza/Projects/feedsphere/ alembic -c ./app/database/alembic.ini upgrade head
+    ```
+
+3. Start the project:
+
+    ```bash
+    PYTHONPATH=/home/mirza/Projects/feedsphere/ python3 app/main.py
+    ```
+
+4. To set up the application with a new admin and a changed `APP_KEY`, use:
+
+    ```bash
+    PYTHONPATH=/home/mirza/Projects/feedsphere/ python3 app/main.py --setup
+    ```
+
+    This will create a new admin, and other users won't be able to sign in.
+
+
+5. For development purposes, run the application with:
+
+    ```bash
+    PYTHONPATH=/home/mirza/Projects/feedsphere/ python3 app/main.py --development
+    ```
+
+Now you are ready to explore Feedsphere for managing your RSS subscriptions!
