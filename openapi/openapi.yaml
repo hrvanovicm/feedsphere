@@ -1,0 +1,278 @@
+openapi: 3.0.0
+info:
+  title: Your API Title
+  version: 1.0.0
+
+paths:
+  /actuator:
+    get:
+      summary: Retrieve actuator information
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                app:
+                  name: "Your App Name"
+                  version: "1.0.0"
+        default:
+          description: Default response
+          content:
+            application/json:
+              example:
+                description: "Unexpected error occurred"
+
+  /users:
+    get:
+      summary: Retrieve a list of users
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  username: "user1"
+                  is_admin: false
+                - id: 2
+                  username: "admin"
+                  is_admin: true
+        default:
+          $ref: '#/components/responses/UnauthorizedError'
+
+    post:
+      summary: Create a new user
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: Successful creation
+          content:
+            application/json:
+              example:
+                id: 3
+                username: "newuser"
+                is_admin: false
+        default:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /users/{userId}:
+    put:
+      summary: Update user information
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successful update
+          content:
+            application/json:
+              example:
+                id: 1
+                username: "updateduser"
+                is_admin: false
+        default:
+          $ref: '#/components/responses/UnauthorizedError'
+
+    delete:
+      summary: Delete a user
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Successful deletion
+        default:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /subscriptions:
+    get:
+      summary: Retrieve a list of subscriptions
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: "TheVerge"
+                  url: "https://thenewstack.io/blog/feed/"
+                - id: 2
+                  name: "AnotherSubscription"
+                  url: "https://example.com/feed/"
+        default:
+          $ref: '#/components/responses/UnauthorizedError'
+
+    post:
+      summary: Create a new subscription
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+      responses:
+        '201':
+          description: Successful creation
+          content:
+            application/json:
+              example:
+                id: 3
+                name: "NewSubscription"
+                url: "https://newsubscription.com/feed/"
+        default:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /subscriptions/{subscriptionId}:
+    put:
+      summary: Update subscription information
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+      responses:
+        '200':
+          description: Successful update
+          content:
+            application/json:
+              example:
+                id: 1
+                name: "TheVergeUpdated"
+                url: "https://thenewstack.io/blog/feed/"
+        default:
+          $ref: '#/components/responses/UnauthorizedError'
+
+    delete:
+      summary: Delete a subscription
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Successful deletion
+        default:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /articles:
+    get:
+      summary: Retrieve a list of articles
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  link: "https://example.com/article/1"
+                  title: "Sample Article 1"
+                  author:
+                    name: "John Doe"
+                  summary: "This is a sample article summary."
+                  published_at: "2022-02-04T12:00:00Z"
+                  created_at: "2022-02-04T10:30:00Z"
+                  subscription:
+                    id: 1
+                    name: "TheVerge"
+                    url: "https://thenewstack.io/blog/feed/"
+                - id: 2
+                  link: "https://example.com/article/2"
+                  title: "Sample Article 2"
+                  author:
+                    name: "Jane Smith"
+                  summary: "Another sample article summary."
+                  published_at: "2022-02-05T14:00:00Z"
+                  created_at: "2022-02-05T11:45:00Z"
+                  subscription:
+                    id: 2
+                    name: "AnotherSubscription"
+                    url: "https://example.com/another/feed/"
+        default:
+          $ref: '#/components/responses/UnauthorizedError'
+
+security:
+  - BearerAuth: []
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+  responses:
+    UnauthorizedError:
+      description: Authentication required
+      content:
+        application/json:
+          example:
+            description: Authentication required
+
+    ForbiddenError:
+      description: Admin permission required!
+      content:
+        application/json:
+          example:
+            description: Admin permission required!

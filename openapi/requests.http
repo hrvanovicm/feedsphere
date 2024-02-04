@@ -1,0 +1,54 @@
+### Actuator
+GET {{ url }}/actuator
+Authorization:{{ token }}
+
+### Users
+GET {{ url }}/users
+Authorization:{{ token }}
+
+### Users
+POST {{ url }}/users
+Content-Type: application/x-www-form-urlencoded
+Authorization:{{ token }}
+
+username = mirza &
+password = mirzasdfsdf
+
+### Users/1
+PUT {{ url }}/users/1
+Content-Type: application/x-www-form-urlencoded
+Authorization:{{ token }}
+
+username = mirza &
+password = password123
+
+### Users/1
+DELETE {{ url }}/users/1
+
+### Subscriptions
+GET {{ url }}/subscriptions
+Authorization:{{ token }}
+
+### Subscriptions
+POST {{ url }}/subscriptions
+Content-Type: application/x-www-form-urlencoded
+Authorization:{{ token }}
+
+name = TheVerge &
+url = https://thenewstack.io/blog/feed/
+
+### Subscriptions/1
+PUT {{ url }}/subscriptions/1
+Content-Type: application/x-www-form-urlencoded
+Authorization:{{ token }}
+
+name = TheVergeUpdated &
+url = https://thenewstack.io/blog/feed
+
+### Subscriptions/1
+DELETE {{ url }}/subscriptions/1
+Authorization:{{ token }}
+
+### Articles
+GET {{ url }}/articles
+Authorization:{{ token }}
