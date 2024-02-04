@@ -1,6 +1,6 @@
 # Feedsphere
 
-Feedsphere is a self-hosted web service designed for storing and managing RSS articles. Built using Falcon for its simplicity and a welcome break from the Spring framework's magic, Feedsphere provides an efficient solution for handling subscriptions.
+Feedsphere is a self-hosted web service designed for storing and managing RSS articles. Built using Falcon for its simplicity and a welcome break from the Spring framework's magic.
 
 **Warning: This app is not production-ready; it is intended for experimental use with Falcon.**
 
