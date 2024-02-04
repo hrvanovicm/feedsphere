@@ -1,14 +1,15 @@
+from app.config import APP_NAME, APP_VERSION
+from app.jobs.fetch_articles import fetch_articles
 from app.resources import BaseResource
-from app.config import APP_NAME, APP_VERSION, MINIMAL_CLIENT_VERSION, CONFIG
 
 
 class ActuatorResource(BaseResource):
+    # noinspection PyUnusedLocal
     def on_get(self, req, resp):
         data = {
             'app': {
                 'name': APP_NAME,
                 'version': APP_VERSION,
-            },
-            'minimalClientVersion': MINIMAL_CLIENT_VERSION
+            }
         }
         self.handle_success(resp, data)

@@ -1,17 +1,29 @@
+# noinspection PyUnresolvedReferences
 import json
+
+# noinspection PyUnresolvedReferences
 import falcon
 
+from . import *
+
+
+# noinspection PyMethodMayBeStatic
 class BaseResource:
-    def handle_success(self, resp, data):
-        resp.status = falcon.HTTP_200
+    def handle_success(self, resp, data=None, code=falcon.HTTP_200):
+        resp.status = code
         resp.content_type = falcon.MEDIA_JSON
-        resp.body = json.dumps(data)
+
+        if data is not None:
+            resp.media = data
 
     def handle_not_found(self, resp):
         resp.status = falcon.HTTP_404
-        resp.body = json.dumps({'err': 'Not found'})
+        resp.media = {
+            'error': 'Resource not found!'
+        }
 
-    def _decode_body(self, req):
-        return req.body
-
-from . import *
+    def handle_validation_failed(self, resp):
+        resp.status = falcon.HTTP_400
+        resp.media = {
+            'title': 'Something went wrong!'
+        }
