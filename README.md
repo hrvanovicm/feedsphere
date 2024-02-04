@@ -42,5 +42,3 @@ Feedsphere is a self-hosted web service designed for storing and managing RSS ar
     ```bash
     PYTHONPATH=/home/mirza/Projects/feedsphere/ python3 app/main.py --development
     ```
-
-Now you are ready to explore Feedsphere for managing your RSS subscriptions!
