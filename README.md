@@ -18,20 +18,20 @@ Feedsphere is a self-hosted web service designed for storing and managing RSS ar
 2. Run migrations using the following commands:
 
     ```bash
-    PYTHONPATH=/home/mirza/Projects/feedsphere/ alembic -c ./app/database/alembic.ini revision --autogenerate
-    PYTHONPATH=/home/mirza/Projects/feedsphere/ alembic -c ./app/database/alembic.ini upgrade head
+    PYTHONPATH={yourpath} alembic -c ./app/database/alembic.ini revision --autogenerate
+    PYTHONPATH={yourpath} alembic -c ./app/database/alembic.ini upgrade head
     ```
 
 3. Start the project:
 
     ```bash
-    PYTHONPATH=/home/mirza/Projects/feedsphere/ python3 app/main.py
+    PYTHONPATH={yourpath} python3 app/main.py
     ```
 
 4. To set up the application with a new admin and a changed `APP_KEY`, use:
 
     ```bash
-    PYTHONPATH=/home/mirza/Projects/feedsphere/ python3 app/main.py --setup
+    PYTHONPATH={yourpath} python3 app/main.py --setup
     ```
 
     This will create a new admin, and other users won't be able to sign in.
@@ -40,5 +40,5 @@ Feedsphere is a self-hosted web service designed for storing and managing RSS ar
 5. For development purposes, run the application with:
 
     ```bash
-    PYTHONPATH=/home/mirza/Projects/feedsphere/ python3 app/main.py --development
+    PYTHONPATH={yourpath} python3 app/main.py --development
     ```
